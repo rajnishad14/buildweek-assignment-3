@@ -4,19 +4,21 @@ import { useState } from "react";
 import Selector from "./components/Selector";
 import { Button, Navbar } from "react-bootstrap";
 import Easy from "./components/Easy"
-import Medium from "./components/Medium";
-import Hard from "./components/Hard";
 
 function App() {
   const [level, setLevel] = useState(0);
   const [eleArr,setEleArr] = useState([]);
+  const [game,setGame]=useState(true);
+  const changeGame=()=>{
+    setGame(!game);
+  }
   const changeLevel = (val) => {
     if(val===0){
       setEleArr([])
     }else if(val===1){
       changeEleArr(6);
     }else if(val===2){
-      changeEleArr(9);
+      changeEleArr(8);
     }else{
       changeEleArr(12);
     }
@@ -46,39 +48,15 @@ function App() {
         </div>
       </>
     );
-  } else if (level === 1) {
+  } else{
     return (
       <>
         <Navbar bg="light" variant="light">
         <Button onClick={()=>changeLevel(0)} variant="outline-dark">Home</Button>
         </Navbar>
         <div className="App">
-          <h1>Card Memory Game</h1>
-          <Easy eleArr={eleArr} />
-        </div>
-      </>
-    );
-  } else if (level === 2) {
-    return (
-      <>
-        <Navbar bg="light" variant="light">
-        <Button onClick={()=>changeLevel(0)} variant="outline-dark">Home</Button>
-        </Navbar>
-        <div className="App">
-          <h1>Card Memory Game</h1>
-          <Medium eleArr={eleArr} />
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Navbar bg="light" variant="light">
-        <Button onClick={()=>changeLevel(0)} variant="outline-dark">Home</Button>
-        </Navbar>
-        <div className="App">
-          <h1>Card Memory Game</h1>
-          <Hard eleArr={eleArr}/>
+          <br/>
+          <Easy eleArr={eleArr} changeGame={changeGame}/>
         </div>
       </>
     );

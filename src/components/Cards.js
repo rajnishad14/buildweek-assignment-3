@@ -1,13 +1,14 @@
 import React from 'react';
 import "./card.css";
 
-const Cards = ({val}) => {
-    const hadleClick=(e)=>{
-        e.target.className="clicked"
-    }
+const Cards = ({val,hadleClick,increase}) => {
+    
     return (
         <>
-            <div onClick={(e)=>hadleClick(e)} className="cell">{val}</div>
+            <div onClick={
+                (e)=>{
+                    hadleClick(e);
+            }} className="cell">{val}</div>
         </>
     );
 };

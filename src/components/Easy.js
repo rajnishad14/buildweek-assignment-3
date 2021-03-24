@@ -1,29 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
+import "./easy.css"
 
-const Easy = ({eleArr}) => {
-  
+const Easy = ({ eleArr }) => {
+  let store = [];
+  const [c, setC] = useState(0);
+  const [moves, setMoves] = useState(0);
+  const hadleClick = (e) => {
+    e.target.className = "clicked"
+    store.push(e.target);
+    if (store.length === 2) {
+      if (store[0].innerHTML !== store[1].innerHTML) {
+        setTimeout(() => {
+          store[0].className = "cell";
+          store[1].className = "cell";
+          store = [];
+        }, 300);
+      } else {
+        setC(c + 1);
+        store = [];
+      }
+    }
+  }
+  useEffect(() => {
+    if (c === eleArr.length / 2) {
+      alert("You won the game 🎉✨🎊");
+    }
+  },
+    // eslint-disable-next-line 
+    [c]);
   return (
-    <>
-      <div>
-        <Cards val={eleArr[0]} />
-        <Cards val={eleArr[1]}/>
-        <Cards val={eleArr[2]}/>
-        <Cards val={eleArr[3]}/>
-      </div>
-      <div>
-        <Cards val={eleArr[4]}/>
-        <Cards val={eleArr[5]}/>
-        <Cards val={eleArr[6]}/>
-        <Cards val={eleArr[7]}/>
-      </div>
-      <div>
-        <Cards val={eleArr[8]}/>
-        <Cards val={eleArr[9]}/>
-        <Cards val={eleArr[10]}/>
-        <Cards val={eleArr[11]}/>
-      </div>
-    </>
+    <div className="grid-container container">
+      {
+        eleArr.map((ele, key) => {
+          return (
+            <Cards hadleClick={hadleClick} key={key} val={ele} />
+          )
+        })
+      }
+      <div>{moves}</div>
+    </div>
   );
 };
 
