@@ -21,7 +21,7 @@ const Selector = (props) => {
               <p>
                 Medium
                 <br />
-                18 Cards
+                16 Cards
               </p>
             </Button>{" "}
             <Button onClick={() => props.changeLevel(3)} variant="danger">
